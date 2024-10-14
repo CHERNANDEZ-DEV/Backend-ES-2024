@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const connectDB = require('./config/db'); // Importar la función de conexión
 const productRoutes = require('./routes/productRoutes');
+const userRoutes = require('./routes/userRoute');
 const morgan = require('morgan');
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(express.json());
 
 // Rutas de productos
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
 
 // Iniciar el servidor
 app.listen(PORT, () => {
