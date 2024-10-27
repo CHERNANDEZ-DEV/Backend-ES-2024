@@ -1,3 +1,4 @@
+const { Timestamp } = require('mongodb');
 const mongoose = require('mongoose');
 
 const requestSchema = new mongoose.Schema({
@@ -7,4 +8,6 @@ const requestSchema = new mongoose.Schema({
     customerPhoneNumber: { type: Number, required: true  },
     requestManufacturer: { type: String, required: true },
     requestModel: { type: String, required: true }
-})
+}, {timestamps: true});
+
+module.exports = mongoose.model('Request', requestSchema);
