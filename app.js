@@ -3,10 +3,13 @@ const express = require('express');
 const connectDB = require('./config/db'); // Importar la función de conexión
 const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoute');
+const requestRoutes = require('./routes/requestRoutes');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+app.use(cors());
 
 app.use(morgan('combined'));
 
@@ -19,6 +22,7 @@ app.use(express.json());
 // Rutas de productos
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/requests', requestRoutes);
 
 // Iniciar el servidor
 app.listen(PORT, () => {

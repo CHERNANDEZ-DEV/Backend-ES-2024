@@ -1,7 +1,6 @@
 const productRepository = require('../repositories/productRepository');
 
 const createProduct = async (productData) => {
-    // Agregar la lógica de negocio necesaria
     return await productRepository.createProduct(productData);
 };
 

@@ -5,7 +5,7 @@ const saveBranch = async(branch) => {
 };
 
 const findAllBranches = async () => {
-    return await Branch.find();
+    return await Branch.find().populate('employees');
 };
 
 const findBranchById = async (branchId) => {
@@ -13,7 +13,7 @@ const findBranchById = async (branchId) => {
 }
 
 module.exports = {
-    createBranch,
+    saveBranch,
     findAllBranches,
     findBranchById
 };

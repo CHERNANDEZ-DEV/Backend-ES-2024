@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-// La sucursal debe tener una coleccion de vehiculos disponibles
-
 const branchSchema = new mongoose.Schema({
     name: { type: String, required: true },
     address: { type: String, required: true },

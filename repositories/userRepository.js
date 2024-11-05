@@ -2,15 +2,19 @@ const User = require('../models/User');
 
 const createUser = async (userData) => {
     const user = new User(userData);
-    return await user.save();
+    return user.save();
 };
 
 const findUserByEmail = async (email) => {
-    return await User.findOne({ email });
+    return  User.findOne({ email });
 };
 
 const findUserById = async (id) => {
-    return await User.findById(id);
+    return User.findById(id);
+}
+
+const findEmployeesByIds = async (employeeIds) => {
+    return User.find({ _id: { $in: employeeIds } });
 }
 
 module.exports = {
