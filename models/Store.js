@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const branchSchema = new mongoose.Schema({
+const storeSchema = new mongoose.Schema({
     name: { type: String, required: true },
     address: { type: String, required: true },
-    phoneNumber: { type: Number, required: true },
+    phoneNumber: { type: String, required: true },
     email: { type: String, required: true },
     employees: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 }, {timestamps: true});
 
-module.exports = mongoose.model('Branch', branchSchema);
+module.exports = mongoose.model('Store', storeSchema);

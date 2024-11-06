@@ -4,6 +4,7 @@ const connectDB = require('./config/db'); // Importar la función de conexión
 const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoute');
 const requestRoutes = require('./routes/requestRoutes');
+const storesRoutes = require('./routes/storeRoutes');
 const morgan = require('morgan');
 const cors = require('cors');
 
@@ -23,6 +24,7 @@ app.use(express.json());
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/requests', requestRoutes);
+app.use('/api/stores', storesRoutes);
 
 // Iniciar el servidor
 app.listen(PORT, () => {
