@@ -27,8 +27,28 @@ const getStoreById = async (req, res) => {
     }
 };
 
+const assingEmployeesToStore = async (req, res) => {
+    try{
+        const store = await storeService.assingEmployeesToStore(req.params.id, req.body.employees);
+        res.status(200).json(store);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+const assignVehiclesToStore = async (req, res) => {
+    try{
+        const store = await storeService.assignVehiclesToStore(req.params.id, req.body.vehicles);
+        res.status(200).json(store);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 module.exports = {
     saveStore,
     getAllStores,
-    getStoreById
+    getStoreById,
+    assingEmployeesToStore,
+    assignVehiclesToStore
 }

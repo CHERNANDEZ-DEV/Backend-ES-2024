@@ -17,7 +17,9 @@ const registerUser = async (userData) => {
   userData.password = hashedPassword;
 
   // Asignar el rol predeterminado de "user"
-  userData.role = 'user';
+  if(userData.role === null){
+    userData.role = 'user';
+  }
 
   return await userRepository.createUser(userData);
 };

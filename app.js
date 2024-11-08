@@ -4,6 +4,7 @@ const connectDB = require('./config/db'); // Importar la función de conexión
 const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoute');
 const requestRoutes = require('./routes/requestRoutes');
+const employeeRoutes = require('./routes/employeeRoutes');
 const storesRoutes = require('./routes/storeRoutes');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -20,11 +21,11 @@ connectDB();
 // Middleware para manejar JSON
 app.use(express.json());
 
-// Rutas de productos
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/requests', requestRoutes);
 app.use('/api/stores', storesRoutes);
+app.use('/api/employees', employeeRoutes);
 
 // Iniciar el servidor
 app.listen(PORT, () => {

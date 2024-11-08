@@ -6,13 +6,13 @@ const saveStore = async(storeData) => {
 };
 
 const findAllStores = async () => {
-    return Store.find().populate('employees');
+    return Store.find().populate('employees').populate('vehicles');
 };
 
 const findStoreById = async (storeId) => {
-   const store = await Store.findById(storeId).populate('employees');   
+   const store = await Store.findById(storeId).populate('employees').populate('vehicles');   
     return store;
-}
+};
 
 module.exports = {
     saveStore,
