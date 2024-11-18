@@ -7,6 +7,7 @@ const requestSchema = new mongoose.Schema({
     customerPhoneNumber: { type: String, required: true  },
     requestManufacturer: { type: String, required: true },
     requestModel: { type: String, required: true },
+    store: { type: mongoose.Schema.Types.ObjectId, ref: 'Store' }
 }, {timestamps: true});
 
 module.exports = mongoose.model('Request', requestSchema);
