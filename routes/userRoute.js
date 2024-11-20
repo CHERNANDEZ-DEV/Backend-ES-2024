@@ -1,6 +1,7 @@
 // routes/userRoutes.js
 const express = require('express');
 const userController = require('../controllers/userController');
+const userManagerController = require('../controllers/userManageController'); 
 const { authenticateToken, authorizeAdmin } = require('../config/auth');
 
 const router = express.Router();
@@ -20,5 +21,14 @@ router.get('/profile', authenticateToken, (req, res) => {
 router.get('/admin-data', authenticateToken, authorizeAdmin, (req, res) => {
   res.json({ message: 'This is admin-only data' });
 });
+
+// Ruta para actualizar usuario
+router.put('/:id', userManagerController.updateUser);
+
+// Ruta para eliminar usuario
+router.delete('/:id', userManagerController.deleteUser);
+
+// Ruta para obtener todos los usuarios
+router.get('/', userManagerController.getAllUsers);
 
 module.exports = router;
