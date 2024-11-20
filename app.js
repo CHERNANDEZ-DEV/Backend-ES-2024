@@ -6,6 +6,7 @@ const userRoutes = require('./routes/userRoute');
 const requestRoutes = require('./routes/requestRoutes');
 const employeeRoutes = require('./routes/employeeRoutes');
 const storesRoutes = require('./routes/storeRoutes');
+const amortizationRoutes = require('./routes/amortizationRoutes');
 const morgan = require('morgan');
 const cors = require('cors');
 
@@ -26,6 +27,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/requests', requestRoutes);
 app.use('/api/stores', storesRoutes);
 app.use('/api/employees', employeeRoutes);
+app.use('/api/amortization', amortizationRoutes);
 
 // Iniciar el servidor
 app.listen(PORT, () => {
