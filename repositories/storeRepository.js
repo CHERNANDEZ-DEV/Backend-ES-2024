@@ -22,6 +22,6 @@ const updateStore = async (storeId, storeData) => {
 module.exports = {
     saveStore,
     findAllStores,
-    findStoreById,
+    findStoreById, 
     updateStore
 };
