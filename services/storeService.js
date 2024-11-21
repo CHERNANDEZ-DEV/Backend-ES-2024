@@ -67,10 +67,16 @@ const updateStore = async (storeId, storeData) => {
     return store.save();
 }
 
+const deleteStore = async (storeId) => {
+    return await storeRepository.deleteStore(storeId);
+};
+
+
 module.exports = {
     saveStore,
     getAllStores,
     getStoreById,
     assingEmployeesToStore,
-    updateStore
+    updateStore,
+    deleteStore
 };

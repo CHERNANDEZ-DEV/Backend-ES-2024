@@ -230,12 +230,35 @@ const updateStore = async (req, res) => {
     }
 };
 
+const deleteStore = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Validación de ID de tienda
+        if (!isValidObjectId(id)) {
+            throw new ValidationError('ID de tienda inválido.');
+        }
+
+        const store = await storeService.getStoreById(id);
+        if (!store) {
+            throw new NotFoundError('Tienda no encontrada.');
+        }
+        
+        await storeService.deleteStore(id);
+        res.status(204).send();
+
+    } catch (error) {
+        handleError(res, error);
+    }
+};
+
 module.exports = {
     saveStore,
     getAllStores,
     getStoreById,
     assingEmployeesToStore,
     assignVehiclesToStore,
-    updateStore
+    updateStore,
+    deleteStore
 }
 
