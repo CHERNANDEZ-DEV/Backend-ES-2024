@@ -1,5 +1,6 @@
 const storeRepository = require('../repositories/storeRepository');
 const mongoose = require('mongoose');
+const { handleError, ValidationError, NotFoundError } = require('../utils/errorHandler');
 
 const saveStore = async (storeData) => {
     return storeRepository.saveStore(storeData);
@@ -46,6 +47,7 @@ const updateStore = async (storeId, storeData) => {
     store.name = storeData.name || store.name;
     store.address = storeData.address || store.address;
     store.email = storeData.email || store.email;
+    store.phoneNumber = storeData.phoneNumber || store.phoneNumber;
 
     // Validación y asignación de empleados
     if (storeData.employees) {
