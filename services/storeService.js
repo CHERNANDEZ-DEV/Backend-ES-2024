@@ -25,9 +25,20 @@ const assignVehiclesToStore = async (storeId, vehicleIds) => {
     return store.save();
 };
 
+const updateStore = async (storeId, storeData) => {
+    const store = await storeRepository.findStoreById(storeId);
+    store.name = storeData.name;
+    store.address = storeData.address;
+    store.email = storeData.email;
+    store.employees = storeData.employees;
+    store.vehicles = storeData.vehicles;
+    return store.save();
+}
+
 module.exports = {
     saveStore,
     getAllStores,
     getStoreById,
-    assingEmployeesToStore
+    assingEmployeesToStore,
+    updateStore
 };

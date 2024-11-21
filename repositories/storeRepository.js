@@ -14,8 +14,14 @@ const findStoreById = async (storeId) => {
     return store;
 };
 
+const updateStore = async (storeId, storeData) => {
+    const store = await Store.findByIdAndUpdate(storeId, storeData, {new: true});   
+    return store;
+}
+
 module.exports = {
     saveStore,
     findAllStores,
-    findStoreById
+    findStoreById,
+    updateStore
 };
