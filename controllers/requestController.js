@@ -1,13 +1,50 @@
 const requestService = require('../services/requestService');
 const mongoose = require('mongoose');
 const Request = require('../models/Request'); 
+const { handleError, ValidationError, NotFoundError, PermissionError } = require('../utils/errorHandler');
+
+// Helper function for email validation
+const validateEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+};
+
+// Helper function for phone number validation (simple format check)
+const validatePhoneNumber = (phone) => {
+    const phoneRegex = /^[\+]?[0-9]{8}$/;
+    return phoneRegex.test(phone);
+};
 
 const save = async (req, res) => {
     try {
+        const { customerFirstName, customerLastName, customerEmail, customerPhoneNumber, requestManufacturer, requestModel, store } = req.body;
+
+        // Validate required fields
+        if (!customerFirstName || !customerLastName || !customerEmail || !customerPhoneNumber || !requestManufacturer || !requestModel || !store) {
+            throw new ValidationError('All fields are required');
+        }
+
+        // Validate email format
+        if (!validateEmail(customerEmail)) {
+            throw new ValidationError('Invalid email format');
+        }
+
+        // Validate phone number format
+        if (!validatePhoneNumber(customerPhoneNumber)) {
+            throw new ValidationError('Invalid phone number format');
+        }
+
+        // Check if the store is a valid ObjectId
+        if (!mongoose.Types.ObjectId.isValid(store)) {
+            throw new ValidationError('Invalid store ID');
+        }
+
+        // Proceed to save the request
         const request = await requestService.saveProduct(req.body);
         res.status(201).json(request);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        // Using the custom error handler
+        handleError(res, error);
     }
 };
 
@@ -16,7 +53,8 @@ const getAllRequests = async (req, res) => {
         const requests = await requestService.getAllRequests();
         res.status(200).json(requests);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        // Using the custom error handler
+        handleError(res, error);
     }
 };
 
@@ -25,7 +63,8 @@ const deleteRequest = async (req, res) => {
         await requestService.deleteRequest(req.params.id);
         res.status(204).send();
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        // Using the custom error handler
+        handleError(res, error);
     }
 };
 
@@ -34,22 +73,20 @@ const getRequestsByStoreId = async (req, res) => {
     try {
         const { storeId } = req.params;
 
-        // Delegar al servicio
+        if (!mongoose.Types.ObjectId.isValid(storeId)) {
+            throw new ValidationError('Invalid store ID');
+        }
+
         const requests = await requestService.getRequestsByStoreId(storeId);
 
-        // Retornar respuesta exitosa
+        if (!requests || requests.length === 0) {
+            throw new NotFoundError('No requests found for this store ID');
+        }
+
         return res.status(200).json(requests);
     } catch (error) {
-        console.error('Error fetching requests:', error.message);
-
-        // Responder según el tipo de error
-        if (error.message === 'Invalid store ID') {
-            return res.status(400).json({ message: error.message });
-        } else if (error.message === 'No requests found for this store ID') {
-            return res.status(404).json({ message: error.message });
-        } else {
-            return res.status(500).json({ message: 'Internal server error', error: error.message });
-        }
+        // Using the custom error handler
+        handleError(res, error);
     }
 };
 
@@ -58,4 +95,4 @@ module.exports = {
     getAllRequests,
     deleteRequest,
     getRequestsByStoreId
-}
+};

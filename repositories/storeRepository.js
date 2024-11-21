@@ -19,9 +19,14 @@ const updateStore = async (storeId, storeData) => {
     return store;
 }
 
+const deleteStore = async (storeId) => {
+    return await Store.findByIdAndDelete(storeId);
+};
+
 module.exports = {
     saveStore,
     findAllStores,
-    findStoreById,
-    updateStore
+    findStoreById, 
+    updateStore,
+    deleteStore
 };
