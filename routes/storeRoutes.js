@@ -6,5 +6,6 @@ const router = express.Router();
 router.post('/', storeController.saveStore);
 router.get('/', storeController.getAllStores);
 router.get('/:id', storeController.getStoreById);
+router.put('/:id', storeController.updateStore);
 
 module.exports = router;
