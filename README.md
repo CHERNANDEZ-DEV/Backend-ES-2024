@@ -122,7 +122,6 @@ Las contribuciones son bienvenidas. Por favor, sigue estos pasos:
 - **Carlos Alberto Hernández**  
   [GitHub](https://github.com/CHERNANDEZ-DEV)
 - **Rodolfo Rafael García**
-- **[Nuevo Desarrollador Nombre]**  
   [GitHub](https://github.com/NUEVO-DESARROLLADOR)
 
 ---
@@ -137,5 +136,5 @@ Este proyecto actualmente no tiene una licencia asignada.
 
 - **Carlos Alberto Hernández**  
   [GitHub](https://github.com/CHERNANDEZ-DEV)  
-  Email: carloshernandez@example.com
+  Email: 00002721@uca.edu.sv
 
