@@ -55,7 +55,7 @@ const create = async (req, res) => {
         validateArray(image, 'Image');
         validateString(engine, 'Engine');
         validateNumber(year, 'Year');
-        validateNumber(price, 'Price');
+        validateString(price, 'Price');
         validateString(type, 'Type');
         validateString(transmission, 'Transmission');
         validateNumber(mileage, 'Mileage');
