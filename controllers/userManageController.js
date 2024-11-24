@@ -1,7 +1,11 @@
 const userManageService = require('../services/userManageService');
+const { handleError, ValidationError } = require('../utils/errorHandler');
 
 const updateUser = async (req, res) => {
     try {
+        if (!req.body.username || !req.body.email || !req.body.password || !req.body.role) {
+            throw new ValidationError('All Fields are required');
+        }
         const user = await userManageService.updateUser(req.params.id ,req.body);
         res.status(200).json(user);
     } catch (error) {
