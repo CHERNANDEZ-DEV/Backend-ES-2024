@@ -78,8 +78,10 @@ const getRequestsByStoreId = async (req, res) => {
         }
 
         const requests = await requestService.getRequestsByStoreId(storeId);
+    
 
         if (!requests || requests.length === 0) {
+            console.log("No requests found for this store ID");
             throw new NotFoundError('No requests found for this store ID');
         }
 

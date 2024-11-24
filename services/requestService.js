@@ -15,18 +15,9 @@ const deleteRequest = async (requestID) => {
 
 // Servicio para obtener solicitudes por ID de tienda
 const getRequestsByStoreId = async (storeId) => {
-    // Validar que el ID de la tienda sea un ObjectId válido
-    if (!mongoose.Types.ObjectId.isValid(storeId)) {
-        throw new Error('Invalid store ID');
-    }
 
     // Obtener las solicitudes desde el repositorio
     const requests = await requestRepository.findRequestsByStoreId(storeId);
-
-    // Validar si se encontraron solicitudes
-    if (!requests.length) {
-        throw new Error('No requests found for this store ID');
-    }
 
     return requests;
 };
